@@ -23,10 +23,6 @@ monitoring lab.
 - Internal adapter: SOC-LAB
 - Internal IP address: 192.168.56.10/24
 
-Kali login:
-username: kali
-password: kali
-
 ## Ubuntu Server
 
 - Purpose: Target server and Wazuh server
@@ -39,11 +35,6 @@ password: kali
 - Internal adapter: SOC-LAB
 - Internal IP address: 192.168.56.20/24
 
-SOC-Ubuntu login:
-name: elysium
-server name: soc-ubuntu
-username: socadmin
-password: socadmin
 
 ## Security Boundaries
 
