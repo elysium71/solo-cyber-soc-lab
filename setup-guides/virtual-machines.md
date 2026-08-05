@@ -18,7 +18,7 @@ monitoring lab.
 - Operating system: Kali Linux
 - CPU: 2 virtual CPUs
 - Memory: 4 GB
-- Storage: 30 GB
+- Storage: 80 GB
 - NAT adapter: Enabled
 - Internal adapter: SOC-LAB
 - Internal IP address: 192.168.56.10/24
@@ -30,7 +30,7 @@ monitoring lab.
 - Operating system: Ubuntu Server 24.04 LTS
 - CPU: 4 virtual CPUs
 - Memory: 8 GB
-- Storage: 60 GB
+- Storage: 90 GB
 - NAT adapter: Enabled
 - Internal adapter: SOC-LAB
 - Internal IP address: 192.168.56.20/24

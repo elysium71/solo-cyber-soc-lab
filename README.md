@@ -56,12 +56,13 @@ The first version will include:
 - [x] Created Ubuntu Server VM
 - [x] Configured isolated lab network
 - [x] Confirmed network connectivity
-- [x] Confirmed legitimate SSH access
-- [ ] Installed Wazuh
-- [ ] Simulated Nmap scan
-- [ ] Simulated failed SSH logins
-- [ ] Investigated alerts
-- [ ] Completed incident report
+- [x] Installed Wazuh
+- [x] Verified Wazuh services
+- [x] Accessed Wazuh Dashboard
+- [x] Verified SSH authentication event detection
+- [ ] Nmap reconnaissance simulation
+- [ ] Incident reports
+
 
 ## Repository Structure
 
