@@ -1,0 +1,4 @@
+# Custom SOC Lab Suricata Rules
+# Detects TCP SYN scanning from the Kali attacker VM toward the Ubuntu target.
+
+alert tcp 192.168.56.10 any -> 192.168.56.20 any (msg:"SOC-LAB Possible TCP Port Scan from Kali"; flags:S; threshold:type both, track by_src, count 10, seconds 10; sid:1000001; rev:1;)
