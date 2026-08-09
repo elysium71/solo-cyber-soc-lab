@@ -1,0 +1,12 @@
+<group name="local,syslog,account_change,">
+
+  <rule id="100100" level="10">
+    <program_name>usermod</program_name>
+    <match>to group 'sudo'</match>
+    <description>Privileged account change: user added to sudo group.</description>
+    <mitre>
+      <id>T1098</id>
+    </mitre>
+  </rule>
+
+</group>
