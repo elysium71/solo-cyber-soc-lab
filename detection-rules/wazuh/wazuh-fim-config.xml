@@ -1,0 +1,6 @@
+```{=html}
+<!-- Day 5 - Wazuh FIM configuration snippet
+Add inside the existing <syscheck> section of /var/ossec/etc/ossec.conf.
+This is a snippet, not a complete ossec.conf. -->
+```
+`<directories realtime="yes" report_changes="yes">`{=html}/etc/soc-lab-monitor.conf`</directories>`{=html}
