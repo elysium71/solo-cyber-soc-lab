@@ -102,9 +102,11 @@ The event was verified in the Wazuh dashboard. The alert showed Rule
 550, Level 7, real-time monitoring, the changed attributes, content
 diff, and MITRE ATT&CK mapping.
 
-Evidence:
+## Evidence
 
-`screenshots/day5-wazuh-fim-realtime-alert.png`
+```text
+screenshots/Day5
+```
 
 ## Cleanup
 

@@ -215,6 +215,10 @@ The final detection chain was:
 
 ## Evidence
 
+```text
+screenshots/Day3
+```
+
 Relevant evidence for this simulation should include:
 
 1.  Kali terminal showing the `nmap -sV 192.168.56.20` scan.
