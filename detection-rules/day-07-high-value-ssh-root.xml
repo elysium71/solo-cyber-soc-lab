@@ -1,0 +1,12 @@
+<group name="local,syslog,sshd,">
+
+  <rule id="100200" level="12">
+    <if_sid>5716</if_sid>
+    <user>root</user>
+    <description>High-value SSH login attempt using root account.</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+</group>
