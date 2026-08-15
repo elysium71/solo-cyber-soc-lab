@@ -1,0 +1,10 @@
+<group name="local,audit,credential_access,">
+
+  <rule id="100300" level="12">
+    <if_sid>80792</if_sid>
+    <match>/etc/shadow</match>
+    <description>Credential file access detected: /etc/shadow.</description>
+    <mitre><id>T1003</id></mitre>
+  </rule>
+
+</group>
