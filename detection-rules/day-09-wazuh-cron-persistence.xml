@@ -1,0 +1,12 @@
+<group name="local,syscheck,persistence,">
+
+  <rule id="100400" level="12">
+    <if_sid>554</if_sid>
+    <field name="file">^/etc/cron\.d/</field>
+    <description>Persistence detected: new cron job created in /etc/cron.d.</description>
+    <mitre>
+      <id>T1053.003</id>
+    </mitre>
+  </rule>
+
+</group>

@@ -51,13 +51,20 @@ Kali Linux → Controlled activity → Ubuntu Server
 
 ## Current Progress
 
+## Current Progress
+
 | Day | Focus | Status | Key outcome |
 | --- | --- | --- | --- |
 | 1 | Lab and network setup | Complete | Built two VMs, configured `SOC-LAB`, and verified ping and SSH connectivity. |
 | 2 | Wazuh installation and validation | Complete | Installed the Wazuh stack and detected failed SSH authentication, including Rules `5710` and `5503`. |
 | 3 | Suricata and Nmap detection | Complete | Integrated Suricata with Wazuh and detected an Nmap scan using Suricata SID `1000001` and Wazuh Rule `86601`. |
 | 4 | Account and privilege monitoring | Complete | Detected account creation and built Wazuh Rule `100100` for sudo-group modification. |
-| 5 | File Integrity Monitoring | In progress | Configure and validate Wazuh FIM for controlled sensitive-file changes. |
+| 5 | File Integrity Monitoring | Complete | Configured Wazuh FIM and validated detection of controlled file changes. |
+| 6 | SSH authentication detection | Complete | Investigated repeated SSH authentication activity and validated Wazuh authentication telemetry. |
+| 7 | Custom SSH detection | Complete | Built Wazuh Rule `100200` to detect high-value SSH login attempts against the root account and mapped it to MITRE ATT&CK `T1110`. |
+| 8 | Auditd and credential access | Complete | Integrated Auditd with Wazuh and built Rule `100300` to detect `/etc/shadow` access, mapped to MITRE ATT&CK `T1003`. |
+| 9 | Cron persistence detection | Complete | Monitored `/etc/cron.d` with real-time FIM and built Rule `100400` to detect cron persistence, mapped to MITRE ATT&CK `T1053.003`. |
+
 
 ## Detection Highlights
 
@@ -82,6 +89,29 @@ A controlled test account was added to the privileged `sudo` group. The default 
 - Result: **Detected**
 
 See [User Added to Sudo Group Detection](detection-rules/sudo-group-modification.md) and the [Wazuh XML rule](detection-rules/wazuh/sudo-group-modification.xml).
+
+### Credential file access
+
+Linux Auditd was integrated with Wazuh to provide command-execution telemetry. A controlled read of `/etc/shadow` was used to validate detection of access to sensitive credential material.
+
+- Wazuh Rule: `100300`
+- Alert level: `12`
+- MITRE ATT&CK: **T1003 — OS Credential Dumping**
+- Result: **Detected**
+
+See [Day 8 Auditd Credential Access](attack-simulations/day08-auditd-credential-access.md).
+
+### Cron persistence
+
+Wazuh real-time File Integrity Monitoring was configured for `/etc/cron.d`. A harmless cron job was then created to simulate scheduled persistence. The generic FIM event was extended with a custom high-severity detection rule.
+
+- Base Wazuh Rule: `554`
+- Custom Wazuh Rule: `100400`
+- Alert level: `12`
+- MITRE ATT&CK: **T1053.003 — Cron**
+- Result: **Detected**
+
+See [Day 9 Cron Persistence Detection](attack-simulations/day09-cron-persistence.md).
 
 ## Repository Structure
 
@@ -123,9 +153,11 @@ solo-cyber-soc-lab/
 
 ## Planned Work
 
-- Complete Wazuh File Integrity Monitoring validation.
-- Create structured incident reports for the simulated events.
-- Add more controlled authentication and persistence scenarios.
+- Expand persistence detection beyond cron-based scheduled tasks.
+- Create structured incident reports from detected security events.
+- Develop additional correlation and custom detection rules.
+- Improve threat-hunting workflows using collected Wazuh telemetry.
+- Continue mapping detections to MITRE ATT&CK.
 - Improve scripts and repeatability as the lab develops.
 
 ## Ethical Use
