@@ -1,0 +1,13 @@
+<group name="local,audit,privilege_escalation,">
+
+  <rule id="100500" level="11">
+    <if_sid>80792</if_sid>
+    <field name="audit.auid">^1000$</field>
+    <field name="audit.euid">^0$</field>
+    <description>Privileged command execution: non-root user executed command as root.</description>
+    <mitre>
+      <id>T1548</id>
+    </mitre>
+  </rule>
+
+</group>
