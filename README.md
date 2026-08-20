@@ -51,67 +51,26 @@ Kali Linux → Controlled activity → Ubuntu Server
 
 ## Current Progress
 
-## Current Progress
+## Lab Progress Roadmap
 
-| Day | Focus | Status | Key outcome |
+| Status | Day | Focus | Key outcome / goal |
 | --- | --- | --- | --- |
-| 1 | Lab and network setup | Complete | Built two VMs, configured `SOC-LAB`, and verified ping and SSH connectivity. |
-| 2 | Wazuh installation and validation | Complete | Installed the Wazuh stack and detected failed SSH authentication, including Rules `5710` and `5503`. |
-| 3 | Suricata and Nmap detection | Complete | Integrated Suricata with Wazuh and detected an Nmap scan using Suricata SID `1000001` and Wazuh Rule `86601`. |
-| 4 | Account and privilege monitoring | Complete | Detected account creation and built Wazuh Rule `100100` for sudo-group modification. |
-| 5 | File Integrity Monitoring | Complete | Configured Wazuh FIM and validated detection of controlled file changes. |
-| 6 | SSH authentication detection | Complete | Investigated repeated SSH authentication activity and validated Wazuh authentication telemetry. |
-| 7 | Custom SSH detection | Complete | Built Wazuh Rule `100200` to detect high-value SSH login attempts against the root account and mapped it to MITRE ATT&CK `T1110`. |
-| 8 | Auditd and credential access | Complete | Integrated Auditd with Wazuh and built Rule `100300` to detect `/etc/shadow` access, mapped to MITRE ATT&CK `T1003`. |
-| 9 | Cron persistence detection | Complete | Monitored `/etc/cron.d` with real-time FIM and built Rule `100400` to detect cron persistence, mapped to MITRE ATT&CK `T1053.003`. |
+| ✅ | **Day 1** | Lab and network setup | Built Kali and Ubuntu VMs, configured the isolated `SOC-LAB` network, and verified connectivity. |
+| ✅ | **Day 2** | Wazuh installation and validation | Installed Wazuh and validated failed SSH authentication telemetry with Rules `5710` and `5503`. |
+| ✅ | **Day 3** | Suricata and Nmap detection | Integrated Suricata with Wazuh and detected Nmap reconnaissance using Suricata SID `1000001` and Wazuh Rule `86601`. |
+| ✅ | **Day 4** | Account and privilege monitoring | Detected account activity and created Rule `100100` for sudo-group modification. |
+| ✅ | **Day 5** | File Integrity Monitoring | Configured and validated Wazuh FIM for controlled file changes. |
+| ✅ | **Day 6** | SSH authentication detection | Investigated repeated SSH authentication activity and validated Wazuh authentication telemetry. |
+| ✅ | **Day 7** | Custom SSH detection | Created Rule `100200` for high-value SSH attempts against the root account and mapped it to MITRE ATT&CK `T1110`. |
+| ✅ | **Day 8** | Auditd credential-access detection | Integrated Auditd and created Rule `100300` for `/etc/shadow` access, mapped to `T1003`. |
+| ✅ | **Day 9** | Cron persistence detection | Added real-time monitoring of `/etc/cron.d` and Rule `100400`, mapped to `T1053.003`. |
+| ✅ | **Day 10** | Privileged command execution | Used Auditd telemetry and Rule `100500` to detect commands executed as root by a non-root login identity. |
+| ✅ | **Day 11** | Network + host correlation | Correlated a Suricata port-scan alert (`86601`) with subsequent SSH invalid-user activity (`5710`) from the same source IP. |
+| ⬜ | **Day 12** | Incident investigation and reporting | Build a structured incident timeline from collected alerts, assess severity, document evidence, and produce an incident report. |
+| ⬜ | **Day 13** | Detection coverage and validation | Review custom detections, map coverage to MITRE ATT&CK, retest key rules, and document detection gaps/false-positive considerations. |
+| ⬜ | **Day 14** | Final SOC lab review  | Perform an end-to-end validation, clean repository documentation, update screenshots/links, summarize skills demonstrated, and prepare the project as a finished portfolio piece. |
 
 
-## Detection Highlights
-
-### Nmap reconnaissance
-
-An authorized `nmap -sV` scan initially exposed a network-visibility gap. Suricata was installed and integrated with Wazuh, then a custom TCP SYN threshold rule was added.
-
-- Suricata SID: `1000001`
-- Wazuh Rule: `86601`
-- MITRE ATT&CK: **T1046 — Network Service Discovery**
-- Result: **Detected**
-
-See [Nmap Port Scan Detection](attack-simulations/day-03-nmap-scan.md).
-
-### Sudo-group modification
-
-A controlled test account was added to the privileged `sudo` group. The default Wazuh event did not clearly identify the privilege change, so a custom rule was developed and tested.
-
-- Wazuh Rule: `100100`
-- Alert level: `10`
-- MITRE ATT&CK: **T1098 — Account Manipulation**
-- Result: **Detected**
-
-See [User Added to Sudo Group Detection](detection-rules/sudo-group-modification.md) and the [Wazuh XML rule](detection-rules/wazuh/sudo-group-modification.xml).
-
-### Credential file access
-
-Linux Auditd was integrated with Wazuh to provide command-execution telemetry. A controlled read of `/etc/shadow` was used to validate detection of access to sensitive credential material.
-
-- Wazuh Rule: `100300`
-- Alert level: `12`
-- MITRE ATT&CK: **T1003 — OS Credential Dumping**
-- Result: **Detected**
-
-See [Day 8 Auditd Credential Access](attack-simulations/day08-auditd-credential-access.md).
-
-### Cron persistence
-
-Wazuh real-time File Integrity Monitoring was configured for `/etc/cron.d`. A harmless cron job was then created to simulate scheduled persistence. The generic FIM event was extended with a custom high-severity detection rule.
-
-- Base Wazuh Rule: `554`
-- Custom Wazuh Rule: `100400`
-- Alert level: `12`
-- MITRE ATT&CK: **T1053.003 — Cron**
-- Result: **Detected**
-
-See [Day 9 Cron Persistence Detection](attack-simulations/day09-cron-persistence.md).
 
 ## Repository Structure
 
@@ -151,14 +110,45 @@ solo-cyber-soc-lab/
 - MITRE ATT&CK mapping
 - Evidence collection and technical documentation
 
-## Planned Work
+## Future Planned Work
 
-- Expand persistence detection beyond cron-based scheduled tasks.
-- Create structured incident reports from detected security events.
-- Develop additional correlation and custom detection rules.
-- Improve threat-hunting workflows using collected Wazuh telemetry.
-- Continue mapping detections to MITRE ATT&CK.
-- Improve scripts and repeatability as the lab develops.
+After the core 14-day lab is complete, the project can continue into a more advanced SOC engineering and detection-engineering phase. These extensions are optional and are intended to make the lab closer to a realistic SOC environment.
+
+| Phase | Focus | Planned work |
+| --- | --- | --- |
+| **Advanced 1** | Multi-endpoint monitoring | Add another Linux endpoint and a Windows endpoint to Wazuh and compare telemetry across multiple hosts. |
+| **Advanced 2** | Windows detection engineering | Deploy Sysmon, collect Windows event telemetry, and create detections for suspicious PowerShell, process creation, and account activity. |
+| **Advanced 3** | Active Response | Configure carefully scoped Wazuh Active Response actions and validate automatic responses to selected high-confidence lab detections. |
+| **Advanced 4** | Detection tuning | Generate benign and suspicious activity, identify false positives, and tune thresholds and rule conditions without losing useful coverage. |
+| **Advanced 5** | Threat hunting | Create repeatable hunting queries for authentication, privilege escalation, persistence, credential access, and network reconnaissance. |
+| **Advanced 6** | ATT&CK coverage matrix | Build a MITRE ATT&CK coverage table showing which techniques are detected, which telemetry provides coverage, and where gaps remain. |
+| **Advanced 7** | Attack-chain correlation | Simulate a controlled multi-stage sequence such as reconnaissance → authentication attempt → privilege activity → persistence and correlate the events into one investigation timeline. |
+| **Advanced 8** | Detection-as-code | Store Wazuh and Suricata rules in version-controlled directories with documentation, test cases, rule IDs, severity, ATT&CK mappings, and expected results. |
+| **Advanced 9** | Automated validation | Create safe scripts that reproduce lab events and verify that expected Wazuh/Suricata detections are generated after rule changes. |
+| **Advanced 10** | SOC metrics and dashboards | Build useful dashboards for alert severity, detection category, source hosts, ATT&CK techniques, authentication activity, and alert trends. |
+| **Advanced 11** | Incident response workflow | Create reusable triage, investigation, containment, evidence, and closure templates and use them during simulated incidents. |
+| **Advanced 12** | Purple-team capstone | Run a final controlled attack simulation across multiple ATT&CK stages, investigate it entirely from collected telemetry, document gaps, improve detections, and publish a final incident report. |
+
+### Long-term target
+
+The advanced phase will evolve the project from a basic home SOC into a small detection-engineering environment demonstrating:
+
+- Multi-host SIEM monitoring
+- Linux and Windows telemetry
+- Wazuh and Suricata detection engineering
+- Sysmon and Auditd analysis
+- Network and endpoint correlation
+- MITRE ATT&CK coverage analysis
+- Threat hunting
+- Detection tuning and false-positive reduction
+- Automated detection testing
+- Incident response documentation
+- SOC dashboards and metrics
+- Controlled purple-team exercises
+- Detection-as-code and Git-based change tracking
+
+The final goal is to demonstrate not only that security alerts can be generated, but that telemetry can be collected, correlated, investigated, tuned, documented, and repeatedly validated using a structured SOC workflow.
+
 
 ## Ethical Use
 
