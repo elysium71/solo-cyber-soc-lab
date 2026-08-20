@@ -66,9 +66,7 @@ Kali Linux → Controlled activity → Ubuntu Server
 | ✅ | **Day 9** | Cron persistence detection | Added real-time monitoring of `/etc/cron.d` and Rule `100400`, mapped to `T1053.003`. |
 | ✅ | **Day 10** | Privileged command execution | Used Auditd telemetry and Rule `100500` to detect commands executed as root by a non-root login identity. |
 | ✅ | **Day 11** | Network + host correlation | Correlated a Suricata port-scan alert (`86601`) with subsequent SSH invalid-user activity (`5710`) from the same source IP. |
-| ⬜ | **Day 12** | Incident investigation and reporting | Build a structured incident timeline from collected alerts, assess severity, document evidence, and produce an incident report. |
-| ⬜ | **Day 13** | Detection coverage and validation | Review custom detections, map coverage to MITRE ATT&CK, retest key rules, and document detection gaps/false-positive considerations. |
-| ⬜ | **Day 14** | Final SOC lab review  | Perform an end-to-end validation, clean repository documentation, update screenshots/links, summarize skills demonstrated, and prepare the project as a finished portfolio piece. |
+| ✅ | **Day 12** | Final SOC lab review  | Perform an end-to-end validation, clean repository documentation, update screenshots/links, summarize skills demonstrated, and prepare the project as a finished portfolio piece. |
 
 
 
@@ -112,7 +110,7 @@ solo-cyber-soc-lab/
 
 ## Future Planned Work
 
-After the core 14-day lab is complete, the project can continue into a more advanced SOC engineering and detection-engineering phase. These extensions are optional and are intended to make the lab closer to a realistic SOC environment.
+After the core 12-day lab is complete, the project can continue into a more advanced SOC engineering and detection-engineering phase. These extensions are optional and are intended to make the lab closer to a realistic SOC environment.
 
 | Phase | Focus | Planned work |
 | --- | --- | --- |
