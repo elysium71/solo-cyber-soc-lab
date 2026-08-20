@@ -49,8 +49,6 @@ Kali Linux → Controlled activity → Ubuntu Server
                            MITRE ATT&CK mapping
 ```
 
-## Current Progress
-
 ## Lab Progress Roadmap
 
 | Status | Day | Focus | Key outcome / goal |
