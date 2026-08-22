@@ -10,7 +10,7 @@ Each module is divided into focused days so implementation, validation, evidence
 | --- | --- | --- | --- |
 | ✅ | **A1-Day 1** | Build + network second Linux endpoint | Built `soc-linux-02`, configured NAT and `SOC-LAB`, assigned `192.168.56.30/24`, verified bidirectional ICMP connectivity, and confirmed SSH TCP/22 access. |
 | ✅ | **A1-Day 2** | Wazuh agent deployment | Installed Wazuh Agent `4.13.1`, enrolled `soc-linux-02` as Agent ID `001`, confirmed Active status, and validated Rules `5557` and `5503`. |
-| ⬜ | **A1-Day 3** | Cross-endpoint detection validation | Generate controlled events on both Linux endpoints, compare host attribution in Wazuh, validate multi-endpoint visibility, and document the completed module. |
+| ✅ | **A1-Day 3** | Cross-endpoint detection validation | Generate controlled events on both Linux endpoints, compare host attribution in Wazuh, validate multi-endpoint visibility, and document the completed module. |
 
 ## Advanced 2 — Windows Detection Engineering
 
@@ -108,7 +108,7 @@ Each module is divided into focused days so implementation, validation, evidence
 ## Progress Summary
 
 ```text
-Advanced 1      2 / 3 complete
+Advanced 1      3 / 3 complete
 Advanced 2      0 / 4
 Advanced 3      0 / 3
 Advanced 4      0 / 3
@@ -123,6 +123,6 @@ Advanced 12     0 / 6
 ```
 
 ## Current Position
-**Current:** A1-Day 2 complete.
+**Current:** A1-Day 3 complete.
 
-**Next:** A1-Day 3 — Cross-endpoint detection validation.
+**Next:** A2-Day 1 
