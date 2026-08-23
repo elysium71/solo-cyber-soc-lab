@@ -16,7 +16,7 @@ Each module is divided into focused days so implementation, validation, evidence
 
 | Status | Day | Focus | Key outcome / goal |
 | --- | --- | --- | --- |
-| ⬜ | **A2-Day 1** | Build + network Windows endpoint | Create a Windows VM, configure NAT and `SOC-LAB`, assign a lab IP, and validate connectivity. |
+| ✅ | **A2-Day 1** | Build + network Windows endpoint | Create a Windows VM, configure NAT and `SOC-LAB`, assign a lab IP, and validate connectivity. |
 | ⬜ | **A2-Day 2** | Wazuh Windows agent | Install and enroll the Wazuh Windows agent and validate Windows event collection. |
 | ⬜ | **A2-Day 3** | Sysmon deployment | Install Sysmon and validate process, network, and security telemetry. |
 | ⬜ | **A2-Day 4** | Windows detection validation | Generate controlled PowerShell, process, and account activity and create or tune detections. |
