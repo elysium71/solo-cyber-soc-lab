@@ -1,0 +1,19 @@
+<group name="windows,sysmon,discovery,">
+
+  <rule id="100601" level="10">
+    <if_sid>92033</if_sid>
+    <match>net.exe</match>
+    <match>localgroup</match>
+    <description>
+      Custom Windows detection: Account discovery activity using net.exe.
+    </description>
+    <mitre>
+      <id>T1087</id>
+    </mitre>
+    <group>
+      account_discovery,
+      attack_t1087,
+    </group>
+  </rule>
+
+</group>

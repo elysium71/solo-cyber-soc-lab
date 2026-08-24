@@ -20,7 +20,7 @@ Each module is divided into focused days so implementation, validation, evidence
 | ✅ | **A2-Day 2** | Wazuh Windows agent | Install and enroll the Wazuh Windows agent and validate Windows event collection. |
 | ✅ | **A2-Day 3** | Sysmon deployment | Install Sysmon and validate process, network, and security telemetry. |
 | ✅ | **A2-Day 4** | Windows detection validation | Generate controlled PowerShell, process, and account activity and create or tune detections. |
-| ⬜ | **A2-Day 5** | Custom detection engineering | Create custom Wazuh rules, validate detections, and document MITRE ATT&CK mappings. |
+| ✅ | **A2-Day 5** | Custom detection engineering | Create custom Wazuh rules, validate detections, and document MITRE ATT&CK mappings. |
 
 ## Advanced 3 — Wazuh Active Response
 
@@ -110,7 +110,7 @@ Each module is divided into focused days so implementation, validation, evidence
 
 ```text
 Advanced 1      3 / 3 complete
-Advanced 2      4 / 5
+Advanced 2      5 / 5 complete
 Advanced 3      0 / 3
 Advanced 4      0 / 3
 Advanced 5      0 / 3
@@ -124,6 +124,6 @@ Advanced 12     0 / 6
 ```
 
 ## Current Position
-**Current:** A2-Day 4 complete.
+**Current:** A2-Day 5 complete.
 
-**Next:** A2-Day 5
+**Next:** A3-Day 1

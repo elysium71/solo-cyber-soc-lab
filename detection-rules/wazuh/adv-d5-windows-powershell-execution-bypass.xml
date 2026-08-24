@@ -1,0 +1,18 @@
+<group name="windows,sysmon,powershell,">
+
+  <rule id="100600" level="10">
+    <if_sid>92027</if_sid>
+    <match>ExecutionPolicy Bypass</match>
+    <description>
+      Custom Windows detection: PowerShell executed with ExecutionPolicy Bypass.
+    </description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+    <group>
+      powershell_execution_bypass,
+      attack_t1059.001,
+    </group>
+  </rule>
+
+</group>
