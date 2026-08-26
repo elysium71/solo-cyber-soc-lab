@@ -1,14 +1,14 @@
 # Mini SOC Lab: Attack Simulation and Detection
 
-A hands-on home Security Operations Centre (SOC) lab for safely simulating, detecting, investigating, and documenting security events with Kali Linux, Ubuntu Server, Wazuh, Suricata, and additional monitored endpoints.
+A hands-on home Security Operations Centre (SOC) lab for safely simulating, detecting, investigating, and documenting security events with Kali Linux, Ubuntu Server, Windows 11, Wazuh, Suricata, Sysmon, Auditd, and additional monitored endpoints.
 
 > All testing is performed only against virtual machines owned and controlled by the project author on an isolated lab network.
 
 ## Project Overview
 
-This project demonstrates a practical blue-team workflow: build an isolated SOC lab, collect endpoint and network telemetry, generate controlled security activity, investigate alerts, identify detection gaps, create and tune custom rules, correlate events, and map detections to MITRE ATT&CK.
+This project demonstrates a practical blue-team workflow: build an isolated SOC lab, collect endpoint and network telemetry, generate controlled security activity, investigate alerts, identify detection gaps, create and tune custom rules, correlate events, map detections to MITRE ATT&CK, and document analyst findings.
 
-The **12-day core lab is complete**. The project is now progressing through an advanced SOC engineering phase covering multi-endpoint monitoring, Windows/Sysmon telemetry, Active Response, threat hunting, detection tuning, ATT&CK coverage, detection-as-code, automated validation, dashboards, incident response, and a final purple-team capstone.
+The **12-day core lab is complete**. The project is now progressing through an advanced SOC engineering phase covering multi-endpoint monitoring, Windows/Sysmon telemetry, incident investigation, Active Response, detection tuning, threat hunting, ATT&CK coverage, detection-as-code, automated validation, dashboards, incident response, and a final purple-team capstone.
 
 ## Current Architecture
 
@@ -16,16 +16,22 @@ The **12-day core lab is complete**. The project is now progressing through an a
 | --- | --- | --- |
 | Kali Linux (`soc-kali`) | Attack simulation | `192.168.56.10` |
 | Ubuntu Server (`soc-ubuntu`) | Wazuh Manager, monitored target, Suricata sensor | `192.168.56.20` |
-| Ubuntu Server (`soc-linux-02`) | Additional Linux endpoint | `192.168.56.30` |
+| Ubuntu Server (`soc-linux-02`) | Additional Linux endpoint / Wazuh Agent `001` | `192.168.56.30` |
+| Windows 11 (`soc-windows-01`) | Windows endpoint / Sysmon / Wazuh Agent `002` | `192.168.56.40` |
 
 ```text
-                    SOC-LAB
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-    soc-kali       soc-ubuntu     soc-linux-02
- 192.168.56.10   192.168.56.20   192.168.56.30
- Attack system   Wazuh/Suricata   Linux endpoint
+                         SOC-LAB
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+    soc-kali            soc-ubuntu         soc-linux-02
+ 192.168.56.10        192.168.56.20       192.168.56.30
+ Attack system        Wazuh/Suricata       Linux endpoint
+                            │
+                            │
+                     soc-windows-01
+                      192.168.56.40
+                    Windows + Sysmon
 ```
 
 ## Project Progress
@@ -55,8 +61,15 @@ See **[Core Lab Progress](progress/core-lab-progress.md)** for the full day-by-d
 
 **Status: In Progress**
 
+Current progress:
 
-See **[Advanced SOC Roadmap](progress/advanced-roadmap.md)** for the complete Advanced 1–12 plan.
+```text
+Advanced 1 — Multi-Endpoint Monitoring       3 / 3 complete
+Advanced 2 — Windows Detection Engineering   5 / 5 complete
+Advanced 3 — Incident Investigation          1 / 3 complete
+```
+
+See **[Advanced SOC Roadmap](progress/advanced-roadmap.md)** for the complete Advanced 1–13 plan.
 
 ## Detection Highlights
 
@@ -103,11 +116,42 @@ Auditd telemetry identifies commands executed as root while retaining the origin
 
 - Wazuh Rule: `100500`
 
-### Network + host correlation
+### Windows PowerShell ExecutionPolicy Bypass
 
-A Suricata port-scan alert and subsequent SSH invalid-user events were correlated using the common source IP `192.168.56.10`.
+Sysmon process telemetry and a custom Wazuh rule detect PowerShell launched with `-ExecutionPolicy Bypass`.
 
-This demonstrates movement from individual alert detection toward investigation of related events across multiple telemetry sources.
+- Wazuh Rule: `100600`
+- Alert level: `10`
+- MITRE ATT&CK: **T1059.001 — PowerShell**
+
+### Windows account discovery
+
+Custom and built-in Wazuh detections identify account and privileged-group discovery using `net.exe` / `net1.exe`.
+
+- Custom Wazuh Rule: `100601`
+- Built-in discovery rules used during investigation: `92033`, `92031`
+- MITRE ATT&CK: **T1087 — Account Discovery**
+- MITRE ATT&CK: **T1069.001 — Permission Groups Discovery: Local Groups**
+
+### Incident investigation + timeline reconstruction
+
+Advanced 3 Day 1 correlated:
+
+```text
+powershell.exe
+├── net.exe user
+│   └── net1.exe user
+└── net.exe localgroup administrators
+    └── net1.exe localgroup administrators
+```
+
+The incident was classified as:
+
+```text
+TRUE POSITIVE — CONTROLLED LAB SIMULATION
+```
+
+See **[Incident Reports](incident-reports/)** for analyst-style investigation reports.
 
 ## Repository Structure
 
@@ -117,12 +161,16 @@ solo-cyber-soc-lab/
 ├── progress/
 │   ├── core-lab-progress.md
 │   └── advanced-roadmap.md
-├── advanced/
-│   └── advanced-01-multi-endpoint/
+├── docs/
+│   ├── advanced-01/
+│   ├── advanced-02/
+│   └── advanced-03/
+├── checklist/
+│   └── advanced/
 ├── architecture/
 ├── attack-simulations/
-├── checklist/
 ├── detection-rules/
+│   └── wazuh/
 ├── incident-reports/
 ├── screenshots/
 ├── scripts/
@@ -133,8 +181,10 @@ solo-cyber-soc-lab/
 
 - Kali Linux
 - Ubuntu Server
+- Windows 11
 - Wazuh SIEM/XDR
 - Suricata IDS
+- Microsoft Sysmon
 - Auditd
 - Linux File Integrity Monitoring
 - Nmap
@@ -142,31 +192,34 @@ solo-cyber-soc-lab/
 - VMware
 - Git and GitHub
 - MITRE ATT&CK
-- Windows and Sysmon *(advanced phase planned)*
 
 ## Skills Demonstrated
 
 - SOC lab architecture and network isolation
-- SIEM deployment and endpoint monitoring
+- SIEM deployment and multi-endpoint monitoring
 - Linux log and Auditd analysis
+- Windows event and Sysmon analysis
 - Network intrusion detection
 - File Integrity Monitoring
 - Detection-gap analysis
 - Custom Wazuh and Suricata rule development
 - Rule testing and alert validation
+- Parent/child process correlation
+- Incident triage and timeline reconstruction
 - Network and endpoint correlation
 - MITRE ATT&CK mapping
 - Evidence collection and technical documentation
-- Multi-endpoint SOC architecture *(in progress)*
+- Analyst-style incident reporting
 
 ## Advanced Direction
 
-The advanced phase expands the project into a small detection-engineering environment with:
+The advanced phase expands the project into a small detection-engineering and SOC investigation environment with:
 
 - Multi-host Wazuh monitoring
 - Linux and Windows telemetry
 - Sysmon and Auditd analysis
-- Active Response
+- Incident investigation and evidence enrichment
+- Wazuh Active Response
 - Detection tuning and false-positive reduction
 - Threat hunting
 - MITRE ATT&CK coverage analysis
