@@ -121,17 +121,6 @@ The PowerShell alert and follow-on discovery detections accurately represented a
 - Preserve both local and UTC timestamps in future incident reports.
 - Use A3-Day 2 to enrich this case with structured alert, host, user, process, and ATT&CK context.
 
-## Evidence
-
-```text
-a3-day1-01-lab-health.png
-a3-day1-02-powershell-bypass-detection.png
-a3-day1-03-privileged-group-discovery.png
-a3-day1-04-investigation-evidence.png
-a3-day1-05-incident-end-marker.png
-a3-day1-06-incident-timeline.png
-a3-day1-07-detection-rule-100600.png
-```
 
 ## Conclusion
 
