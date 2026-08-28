@@ -198,19 +198,6 @@ Account and privileged-group discovery
 
 The activity was intentionally generated in the isolated SOC lab, so no real compromise occurred.
 
-## Evidence
-
-```text
-screenshots/advanced-03/day-01/
-
-a3-day1-01-lab-health.png
-a3-day1-02-powershell-bypass-detection.png
-a3-day1-03-privileged-group-discovery.png
-a3-day1-04-investigation-evidence.png
-a3-day1-05-incident-end-marker.png
-a3-day1-06-incident-timeline.png
-a3-day1-07-detection-rule-100600.png
-```
 
 ## Result
 
