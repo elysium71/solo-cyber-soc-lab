@@ -27,7 +27,7 @@ Each module is divided into focused days so implementation, validation, evidence
 | Status | Day | Focus | Key outcome / goal |
 | --- | --- | --- | --- |
 | ✅ | **A3-Day 1** | Windows incident investigation | Generated a controlled Windows incident, validated Rule `100600` and discovery detections, correlated the PowerShell → `net.exe` → `net1.exe` process chain, reconstructed the timeline, documented detection gaps, and produced an analyst verdict. |
-| ⬜ | **A3-Day 2** | Incident triage + evidence enrichment | Enrich alerts with endpoint, user, process, telemetry, and ATT&CK context and build a structured incident case. |
+| ✅ | **A3-Day 2** | Incident triage + evidence enrichment | Enrich alerts with endpoint, user, process, telemetry, and ATT&CK context and build a structured incident case. |
 | ⬜ | **A3-Day 3** | Investigation report + lessons learned | Finalize the incident report, document detection/visibility gaps, recommendations, and reusable investigation procedures. |
 
 ## Advanced 4 — Wazuh Active Response
@@ -119,7 +119,7 @@ Each module is divided into focused days so implementation, validation, evidence
 ```text
 Advanced 1      3 / 3 complete
 Advanced 2      5 / 5 complete
-Advanced 3      1 / 3 complete
+Advanced 3      2 / 3 complete
 Advanced 4      0 / 3
 Advanced 5      0 / 3
 Advanced 6      0 / 3
@@ -134,6 +134,6 @@ Advanced 13     0 / 6
 
 ## Current Position
 
-**Current:** A3-Day 1 complete.
+**Current:** A3-Day 2 complete.
 
-**Next:** A3-Day 2 — Incident triage + evidence enrichment.
+**Next:** A3-Day 3 — Investigation Report + Lessons Learned.
