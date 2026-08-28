@@ -170,13 +170,9 @@ SOC Alert Investigation
 
 ```text
 ✅ A2-Day 1 — Build + network Windows endpoint
-
 ✅ A2-Day 2 — Wazuh Windows agent + telemetry
-
 ✅ A2-Day 3 — Sysmon deployment + Wazuh integration
-
 ✅ A2-Day 4 — Windows detection validation
-
 ✅ A2-Day 5 — Custom detection engineering
 ```
 
